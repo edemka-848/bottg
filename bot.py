@@ -28,8 +28,11 @@ def send_welcome(message):
 def echo_message(message):
     bot.reply_to(message, message.text)
 
-
+@bot.message_handler(content_types=['new_chat_members'])
+def make_some(message):
+    bot.send_message(message.chat.id, 'I accepted a new user!')
+    bot.approve_chat_join_request(message.chat.id, message.from_user.id)
+    
 
 
 bot.infinity_polling()
-
